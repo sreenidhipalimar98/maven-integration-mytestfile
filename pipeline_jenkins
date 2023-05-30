@@ -5,10 +5,20 @@ pipeline
         maven 'maven'
     }
     stages {
-    
+
+        stage('validate') {
+            steps {
+                sh 'mvn validate'
+            }
+        }
+        stage('clean') {
+            steps {
+                sh "mvn clean"
+            }
+        }
         stage('compile') {
             steps {
-                sh 'mvn compile'
+                sh "mvn compile"
             }
         }
         stage('test') {
@@ -19,6 +29,16 @@ pipeline
         stage('package') {
             steps {
                 sh "mvn package"
+            }
+        }
+        stage('verify') {
+            steps {
+                sh "mvn verify"
+            }
+        }
+        stage('install') {
+            steps {
+                sh "mvn install"
             }
         }
 
